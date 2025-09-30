@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ifood-adapter-rest" />
+        <module name="ifood-domain" />
+        <module name="ifood-adapter-messaging" />
+        <module name="ifood-adapter-persistence" />
+        <module name="ifood-application" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ifood-adapter-messaging" options="" />
+      <module name="ifood-adapter-persistence" options="" />
+      <module name="ifood-adapter-rest" options="" />
+      <module name="ifood-application" options="" />
+      <module name="ifood-clone-parent" options="" />
+      <module name="ifood-domain" options="" />
+    </option>
+  </component>
+</project>
