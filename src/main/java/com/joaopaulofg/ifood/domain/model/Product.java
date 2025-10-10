@@ -3,6 +3,7 @@ package com.joaopaulofg.ifood.domain.model;
 import com.joaopaulofg.ifood.domain.exception.InvalidProductException;
 import com.joaopaulofg.ifood.domain.v0.ProductId;
 import com.joaopaulofg.ifood.domain.v0.ProductStatus;
+import com.joaopaulofg.ifood.domain.v0.RestaurantId;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,13 +25,13 @@ public class Product {
 
     private UUID categoryId;
 
-    private UUID restaurantId;
+    private RestaurantId restaurantId;
 
     private LocalDateTime creationDate;
 
     private ProductStatus status;
 
-    private Product(ProductId id, String name, String description, BigDecimal price, UUID categoryId, UUID restaurantId) {
+    private Product(ProductId id, String name, String description, BigDecimal price, UUID categoryId, RestaurantId restaurantId) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -38,10 +39,12 @@ public class Product {
         this.categoryId = categoryId;
         this.restaurantId = restaurantId;
         this.creationDate = LocalDateTime.now();
-        this.status = price.compareTo(BigDecimal.ZERO) < 0 ? ProductStatus.INACTIVE : ProductStatus.ACTIVE;
+        this.status = price.compareTo(BigDecimal.ZERO) < 0
+                ? ProductStatus.INACTIVE
+                : ProductStatus.ACTIVE;
     }
 
-    public static Product create(ProductId id, String name, String description, BigDecimal price, UUID categoryId, UUID restaurantId) {
+    public static Product create(ProductId id, String name, String description, BigDecimal price, UUID categoryId, RestaurantId restaurantId) {
         if(name == null || name.trim().isEmpty()) {
             throw new InvalidProductException("Product name cannot be empty!");
         }
@@ -61,13 +64,13 @@ public class Product {
     }
 
     public void update(String name, String description, BigDecimal price) {
-        if(name == null || name.trim().isEmpty()) {
+        if (name != null && !name.trim().isEmpty()) {
             this.name = name;
         }
-        if(description == null || description.trim().isEmpty()) {
+        if (description != null && !description.trim().isEmpty()) {
             this.description = description;
         }
-        if(price != null &&  price.compareTo(BigDecimal.ZERO) < 0) {
+        if (price != null && price.compareTo(BigDecimal.ZERO) >= 0) {
             this.price = price;
         }
     }

@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres-meubanco
+    environment:
+      POSTGRES_DB: meubanco
+      POSTGRES_USER: joao
+      POSTGRES_PASSWORD: senha123
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ifood-net
+
+  app:
+    build: .
+    container_name: ifood-app
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/meubanco
+      SPRING_DATASOURCE_USERNAME: joao
+      SPRING_DATASOURCE_PASSWORD: senha123
+      SPRING_JPA_HIBERNATE_DDL_AUTO: create-drop
+    ports:
+      - "8080:8080"
+    networks:
+      - ifood-net
+
+volumes:
+  postgres_data:
+
+networks:
+  ifood-net:
+    driver: bridge

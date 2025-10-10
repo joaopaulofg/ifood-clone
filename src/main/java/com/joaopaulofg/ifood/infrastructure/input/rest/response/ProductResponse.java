@@ -1,6 +1,7 @@
 package com.joaopaulofg.ifood.infrastructure.input.rest.response;
 
 import com.joaopaulofg.ifood.domain.v0.ProductStatus;
+import com.joaopaulofg.ifood.domain.v0.RestaurantId;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -23,7 +24,7 @@ public class ProductResponse {
 
     private UUID categoryId;
 
-    private UUID restaurantId;
+    private RestaurantId restaurantId;
 
     private LocalDateTime creationDate;
 

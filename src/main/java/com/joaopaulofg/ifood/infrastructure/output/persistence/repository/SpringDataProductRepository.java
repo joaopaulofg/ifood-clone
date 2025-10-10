@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface SpringDataProductRepository extends CrudRepository<ProductEntity, UUID> {
+public interface SpringDataProductRepository extends CrudRepository<ProductEntity, String> {
 }

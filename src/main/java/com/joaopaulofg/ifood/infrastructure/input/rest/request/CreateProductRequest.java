@@ -1,5 +1,6 @@
 package com.joaopaulofg.ifood.infrastructure.input.rest.request;
 
+import com.joaopaulofg.ifood.domain.v0.RestaurantId;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,5 +16,5 @@ public class CreateProductRequest {
     private String description;
     private BigDecimal price;
     private UUID categoryId;
-    private UUID restaurantId;
+    private RestaurantId restaurantId;
 }

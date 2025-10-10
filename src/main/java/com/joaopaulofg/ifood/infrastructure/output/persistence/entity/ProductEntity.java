@@ -34,8 +34,9 @@ public class ProductEntity {
     @Column(nullable = false)
     private UUID categoryId;
 
-    @Column(nullable = false)
-    private UUID restaurantId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    private RestaurantEntity restaurant;
 
     @Column(nullable = false)
     private LocalDateTime creationDate;
