@@ -1,12 +1,13 @@
 package com.joaopaulofg.ifood.infrastructure.input.rest.response;
 
-import com.joaopaulofg.ifood.domain.v0.ProductStatus;
-import com.joaopaulofg.ifood.domain.v0.RestaurantId;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
+
+import com.joaopaulofg.ifood.domain.vo.ProductStatus;
+import com.joaopaulofg.ifood.domain.vo.RestaurantId;
 
 @Getter
 @Builder

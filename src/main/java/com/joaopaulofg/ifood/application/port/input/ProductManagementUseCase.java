@@ -1,8 +1,7 @@
 package com.joaopaulofg.ifood.application.port.input;
 
-import com.joaopaulofg.ifood.domain.model.Product;
-import com.joaopaulofg.ifood.domain.v0.ProductId;
-import com.joaopaulofg.ifood.domain.v0.RestaurantId;
+import com.joaopaulofg.ifood.domain.vo.ProductId;
+import com.joaopaulofg.ifood.domain.vo.RestaurantId;
 import com.joaopaulofg.ifood.infrastructure.input.rest.response.ProductResponse;
 
 import java.math.BigDecimal;

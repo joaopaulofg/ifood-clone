@@ -1,7 +1,7 @@
 package com.joaopaulofg.ifood.infrastructure.output.persistence.mapper;
 
 import com.joaopaulofg.ifood.domain.model.Restaurant;
-import com.joaopaulofg.ifood.domain.v0.RestaurantId;
+import com.joaopaulofg.ifood.domain.vo.RestaurantId;
 import com.joaopaulofg.ifood.infrastructure.output.persistence.entity.RestaurantEntity;
 import org.springframework.stereotype.Component;
 

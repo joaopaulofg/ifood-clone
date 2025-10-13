@@ -1,4 +1,4 @@
-package com.joaopaulofg.ifood.domain.v0;
+package com.joaopaulofg.ifood.domain.vo;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

@@ -1,7 +1,7 @@
 package com.joaopaulofg.ifood.application.port.output;
 
 import com.joaopaulofg.ifood.domain.model.Restaurant;
-import com.joaopaulofg.ifood.domain.v0.RestaurantId;
+import com.joaopaulofg.ifood.domain.vo.RestaurantId;
 
 import java.util.List;
 import java.util.Optional;

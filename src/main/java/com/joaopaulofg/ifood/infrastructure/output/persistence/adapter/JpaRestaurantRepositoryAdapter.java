@@ -2,7 +2,7 @@ package com.joaopaulofg.ifood.infrastructure.output.persistence.adapter;
 
 import com.joaopaulofg.ifood.application.port.output.RestaurantRepository;
 import com.joaopaulofg.ifood.domain.model.Restaurant;
-import com.joaopaulofg.ifood.domain.v0.RestaurantId;
+import com.joaopaulofg.ifood.domain.vo.RestaurantId;
 import com.joaopaulofg.ifood.infrastructure.output.persistence.mapper.RestaurantEntityMapper;
 import com.joaopaulofg.ifood.infrastructure.output.persistence.repository.SpringDataRestaurantRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.joaopaulofg.ifood.domain.v0;
+package com.joaopaulofg.ifood.domain.vo;
 
 import java.util.Objects;
 import java.util.UUID;

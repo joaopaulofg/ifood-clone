@@ -1,7 +1,6 @@
 package com.joaopaulofg.ifood.infrastructure.output.persistence.adapter;
 
 import com.joaopaulofg.ifood.application.port.output.ProductRepository;
-import com.joaopaulofg.ifood.application.service.ProductMapper;
 import com.joaopaulofg.ifood.domain.model.Product;
 import com.joaopaulofg.ifood.infrastructure.output.persistence.mapper.ProductEntityMapper;
 import com.joaopaulofg.ifood.infrastructure.output.persistence.repository.SpringDataProductRepository;

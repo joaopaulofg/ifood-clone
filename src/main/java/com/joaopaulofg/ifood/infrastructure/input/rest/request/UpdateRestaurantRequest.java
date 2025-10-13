@@ -4,18 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-import java.util.UUID;
-
-import com.joaopaulofg.ifood.domain.vo.RestaurantId;
-
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateProductRequest {
+public class UpdateRestaurantRequest {
     private String name;
     private String description;
-    private BigDecimal price;
-    private UUID categoryId;
-    private RestaurantId restaurantId;
 }

@@ -3,11 +3,10 @@ package com.joaopaulofg.ifood.application.service;
 import com.joaopaulofg.ifood.application.port.input.RestaurantManagementUseCase;
 import com.joaopaulofg.ifood.application.port.output.RestaurantRepository;
 import com.joaopaulofg.ifood.domain.model.Restaurant;
-import com.joaopaulofg.ifood.domain.v0.RestaurantId;
+import com.joaopaulofg.ifood.domain.vo.RestaurantId;
 import com.joaopaulofg.ifood.infrastructure.input.rest.response.RestaurantResponse;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

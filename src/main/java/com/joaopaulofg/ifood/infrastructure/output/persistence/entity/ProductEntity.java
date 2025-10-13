@@ -1,6 +1,5 @@
 package com.joaopaulofg.ifood.infrastructure.output.persistence.entity;
 
-import com.joaopaulofg.ifood.domain.v0.ProductStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +9,8 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
+
+import com.joaopaulofg.ifood.domain.vo.ProductStatus;
 
 @Entity
 @Table(name = "products")

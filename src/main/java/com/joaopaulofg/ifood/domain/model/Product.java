@@ -1,9 +1,10 @@
 package com.joaopaulofg.ifood.domain.model;
 
 import com.joaopaulofg.ifood.domain.exception.InvalidProductException;
-import com.joaopaulofg.ifood.domain.v0.ProductId;
-import com.joaopaulofg.ifood.domain.v0.ProductStatus;
-import com.joaopaulofg.ifood.domain.v0.RestaurantId;
+import com.joaopaulofg.ifood.domain.vo.ProductId;
+import com.joaopaulofg.ifood.domain.vo.ProductStatus;
+import com.joaopaulofg.ifood.domain.vo.RestaurantId;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -42,6 +43,22 @@ public class Product {
         this.status = price.compareTo(BigDecimal.ZERO) < 0
                 ? ProductStatus.INACTIVE
                 : ProductStatus.ACTIVE;
+    }
+
+    // Factory method used to rehydrate a Product from persistence layer
+    public static Product restore(ProductId id, String name, String description, BigDecimal price,
+                                  UUID categoryId, RestaurantId restaurantId,
+                                  LocalDateTime creationDate, ProductStatus status) {
+        Product product = new Product();
+        product.id = id;
+        product.name = name;
+        product.description = description;
+        product.price = price;
+        product.categoryId = categoryId;
+        product.restaurantId = restaurantId;
+        product.creationDate = creationDate;
+        product.status = status;
+        return product;
     }
 
     public static Product create(ProductId id, String name, String description, BigDecimal price, UUID categoryId, RestaurantId restaurantId) {

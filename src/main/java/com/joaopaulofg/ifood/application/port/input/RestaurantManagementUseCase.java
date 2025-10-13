@@ -1,6 +1,6 @@
 package com.joaopaulofg.ifood.application.port.input;
 
-import com.joaopaulofg.ifood.domain.v0.RestaurantId;
+import com.joaopaulofg.ifood.domain.vo.RestaurantId;
 import com.joaopaulofg.ifood.infrastructure.input.rest.response.RestaurantResponse;
 
 import java.util.List;
