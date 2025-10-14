@@ -26,6 +26,15 @@ CREATE TABLE IF NOT EXISTS products (
   CONSTRAINT fk_products_category FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
+-- Clients
+CREATE TABLE IF NOT EXISTS clients (
+  id VARCHAR(255) PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  cpf VARCHAR(255) NOT NULL,
+  creation_date TIMESTAMP NOT NULL
+);
+
 -- Seed Categories
 INSERT INTO categories (id, name, description, creation_date) VALUES
   ('cat-001', 'Bebidas', 'Drinks and refreshments', CURRENT_TIMESTAMP),
