@@ -2,6 +2,7 @@ package com.joaopaulofg.ifood.infrastructure.output.persistence.mapper;
 
 import com.joaopaulofg.ifood.domain.model.Product;
 import com.joaopaulofg.ifood.domain.vo.ProductId;
+import com.joaopaulofg.ifood.domain.vo.CategoryId;
 import com.joaopaulofg.ifood.domain.vo.RestaurantId;
 import com.joaopaulofg.ifood.infrastructure.output.persistence.entity.ProductEntity;
 import com.joaopaulofg.ifood.infrastructure.output.persistence.entity.RestaurantEntity;
@@ -16,7 +17,7 @@ public class ProductEntityMapper {
                 entity.getName(),
                 entity.getDescription(),
                 entity.getPrice(),
-                entity.getCategoryId(),
+                CategoryId.of(entity.getCategoryId()),
                 new RestaurantId(entity.getRestaurant().getId()),
                 entity.getCreationDate(),
                 entity.getStatus()
@@ -29,7 +30,7 @@ public class ProductEntityMapper {
         entity.setName(product.getName());
         entity.setDescription(product.getDescription());
         entity.setPrice(product.getPrice());
-        entity.setCategoryId(product.getCategoryId());
+        entity.setCategoryId(product.getCategoryId().getValue());
         entity.setCreationDate(product.getCreationDate());
         entity.setStatus(product.getStatus());
 

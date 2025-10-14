@@ -13,8 +13,8 @@ public class ProductMapper {
                 .name(product.getName())
                 .description(product.getDescription())
                 .price(product.getPrice())
-                .categoryId(product.getCategoryId())
-                .restaurantId(product.getRestaurantId())
+                .categoryId(product.getCategoryId().toString())
+                .restaurantId(product.getRestaurantId().toString())
                 .creationDate(product.getCreationDate())
                 .status(product.getStatus())
                 .build();

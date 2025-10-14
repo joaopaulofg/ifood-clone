@@ -6,11 +6,11 @@ import com.joaopaulofg.ifood.infrastructure.input.rest.response.ProductResponse;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
+import com.joaopaulofg.ifood.domain.vo.CategoryId;
 
 public interface ProductManagementUseCase {
 
-    ProductResponse create(String name, String description, BigDecimal price, UUID categoryId, RestaurantId restaurantId);
+    ProductResponse create(String name, String description, BigDecimal price, CategoryId categoryId, RestaurantId restaurantId);
     ProductResponse findProduct(ProductId id);
     List<ProductResponse> findAllProducts();
     ProductResponse updateProduct(ProductId id, String name, String description, BigDecimal price);

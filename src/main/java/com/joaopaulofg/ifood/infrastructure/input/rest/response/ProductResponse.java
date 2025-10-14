@@ -23,9 +23,9 @@ public class ProductResponse {
 
     private BigDecimal price;
 
-    private UUID categoryId;
+    private String categoryId;
 
-    private RestaurantId restaurantId;
+    private String restaurantId;
 
     private LocalDateTime creationDate;
 

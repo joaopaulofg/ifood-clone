@@ -24,7 +24,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/meubanco
       SPRING_DATASOURCE_USERNAME: joao
       SPRING_DATASOURCE_PASSWORD: senha123
-      SPRING_JPA_HIBERNATE_DDL_AUTO: create-drop
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
     ports:
       - "8080:8080"
     networks:

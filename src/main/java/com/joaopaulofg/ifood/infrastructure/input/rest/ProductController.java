@@ -1,6 +1,8 @@
 package com.joaopaulofg.ifood.infrastructure.input.rest;
 
 import com.joaopaulofg.ifood.application.port.input.ProductManagementUseCase;
+import com.joaopaulofg.ifood.domain.vo.CategoryId;
+import com.joaopaulofg.ifood.domain.vo.RestaurantId;
 import com.joaopaulofg.ifood.infrastructure.input.rest.request.CreateProductRequest;
 import com.joaopaulofg.ifood.infrastructure.input.rest.response.ProductResponse;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +21,13 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<ProductResponse> createProduct(@RequestBody CreateProductRequest request){
-        ProductResponse response = productManagement.create(request.getName(), request.getDescription(),
-                request.getPrice(), request.getCategoryId(), request.getRestaurantId());
+        ProductResponse response = productManagement.create(
+                request.getName(),
+                request.getDescription(),
+                request.getPrice(),
+                CategoryId.of(request.getCategoryId()),
+                RestaurantId.of(request.getRestaurantId())
+        );
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 

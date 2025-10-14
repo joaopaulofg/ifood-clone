@@ -4,13 +4,13 @@ import com.joaopaulofg.ifood.domain.exception.InvalidProductException;
 import com.joaopaulofg.ifood.domain.vo.ProductId;
 import com.joaopaulofg.ifood.domain.vo.ProductStatus;
 import com.joaopaulofg.ifood.domain.vo.RestaurantId;
+import com.joaopaulofg.ifood.domain.vo.CategoryId;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
@@ -24,7 +24,7 @@ public class Product {
 
     private BigDecimal price;
 
-    private UUID categoryId;
+    private CategoryId categoryId;
 
     private RestaurantId restaurantId;
 
@@ -32,7 +32,7 @@ public class Product {
 
     private ProductStatus status;
 
-    private Product(ProductId id, String name, String description, BigDecimal price, UUID categoryId, RestaurantId restaurantId) {
+    private Product(ProductId id, String name, String description, BigDecimal price, CategoryId categoryId, RestaurantId restaurantId) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -47,7 +47,7 @@ public class Product {
 
     // Factory method used to rehydrate a Product from persistence layer
     public static Product restore(ProductId id, String name, String description, BigDecimal price,
-                                  UUID categoryId, RestaurantId restaurantId,
+                                  CategoryId categoryId, RestaurantId restaurantId,
                                   LocalDateTime creationDate, ProductStatus status) {
         Product product = new Product();
         product.id = id;
@@ -61,7 +61,7 @@ public class Product {
         return product;
     }
 
-    public static Product create(ProductId id, String name, String description, BigDecimal price, UUID categoryId, RestaurantId restaurantId) {
+    public static Product create(ProductId id, String name, String description, BigDecimal price, CategoryId categoryId, RestaurantId restaurantId) {
         if(name == null || name.trim().isEmpty()) {
             throw new InvalidProductException("Product name cannot be empty!");
         }
