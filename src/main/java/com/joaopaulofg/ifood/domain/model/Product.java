@@ -6,13 +6,13 @@ import com.joaopaulofg.ifood.domain.vo.ProductStatus;
 import com.joaopaulofg.ifood.domain.vo.RestaurantId;
 import com.joaopaulofg.ifood.domain.vo.CategoryId;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Getter
+@Data
 @NoArgsConstructor
 public class Product {
 

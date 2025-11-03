@@ -25,6 +25,7 @@ services:
       SPRING_DATASOURCE_USERNAME: joao
       SPRING_DATASOURCE_PASSWORD: senha123
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_SQL_INIT_MODE: always
     ports:
       - "8080:8080"
     networks:

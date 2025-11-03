@@ -2,6 +2,7 @@ package com.joaopaulofg.ifood.infrastructure.output.persistence.adapter;
 
 import com.joaopaulofg.ifood.application.port.output.ProductRepository;
 import com.joaopaulofg.ifood.domain.model.Product;
+import com.joaopaulofg.ifood.domain.vo.ProductId;
 import com.joaopaulofg.ifood.infrastructure.output.persistence.mapper.ProductEntityMapper;
 import com.joaopaulofg.ifood.infrastructure.output.persistence.repository.SpringDataProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,9 @@ public class JpaProductRepositoryAdapter implements ProductRepository {
     private final ProductEntityMapper mapper;
 
     @Override
-    public Optional<Product> findById(UUID id) {
-        return Optional.empty();
+    public Optional<Product> findById(ProductId id) {
+        return repository.findById(id.getValue())
+                .map(mapper::toDomain);
     }
 
     @Override
@@ -40,7 +42,7 @@ public class JpaProductRepositoryAdapter implements ProductRepository {
     }
 
     @Override
-    public void deleteById(UUID id) {
-
+    public void deleteById(ProductId id) {
+        repository.deleteById(id.getValue());
     }
 }
