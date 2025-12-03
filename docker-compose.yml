@@ -30,9 +30,39 @@ services:
       - "8080:8080"
     networks:
       - ifood-net
+  catalog-db:
+    image: postgres:16
+    container_name: catalog-postgres
+    environment:
+      POSTGRES_DB: catalogdb
+      POSTGRES_USER: catalog
+      POSTGRES_PASSWORD: catalog
+    ports:
+      - "5434:5432"
+    volumes:
+      - catalog_data:/var/lib/postgresql/data
+    networks:
+      - ifood-net
+
+  catalog-service:
+    build: ./catalog-service
+    container_name: catalog-service
+    depends_on:
+      - catalog-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://catalog-db:5432/catalogdb
+      SPRING_DATASOURCE_USERNAME: catalog
+      SPRING_DATASOURCE_PASSWORD: catalog
+      SPRING_SQL_INIT_MODE: always
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    ports:
+      - "8082:8082"
+    networks:
+      - ifood-net
 
 volumes:
   postgres_data:
+  catalog_data:
 
 networks:
   ifood-net:

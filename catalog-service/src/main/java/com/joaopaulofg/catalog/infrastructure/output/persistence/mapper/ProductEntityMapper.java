@@ -1,0 +1,43 @@
+package com.joaopaulofg.catalog.infrastructure.output.persistence.mapper;
+
+import com.joaopaulofg.catalog.domain.model.Product;
+import com.joaopaulofg.catalog.domain.vo.ProductId;
+import com.joaopaulofg.catalog.domain.vo.CategoryId;
+import com.joaopaulofg.catalog.domain.vo.RestaurantId;
+import com.joaopaulofg.catalog.infrastructure.output.persistence.entity.ProductEntity;
+import com.joaopaulofg.catalog.infrastructure.output.persistence.entity.RestaurantEntity;
+import org.springframework.stereotype.Component;
+
+@Component
+public class ProductEntityMapper {
+
+    public Product toDomain(ProductEntity entity) {
+        return Product.restore(
+                new ProductId(entity.getId()),
+                entity.getName(),
+                entity.getDescription(),
+                entity.getPrice(),
+                CategoryId.of(entity.getCategoryId()),
+                new RestaurantId(entity.getRestaurant().getId()),
+                entity.getCreationDate(),
+                entity.getStatus()
+        );
+    }
+
+    public static ProductEntity toEntity(Product product) {
+        ProductEntity entity = new ProductEntity();
+        entity.setId(product.getId().getValue());
+        entity.setName(product.getName());
+        entity.setDescription(product.getDescription());
+        entity.setPrice(product.getPrice());
+        entity.setCategoryId(product.getCategoryId().getValue());
+        entity.setCreationDate(product.getCreationDate());
+        entity.setStatus(product.getStatus());
+
+        RestaurantEntity restaurantRef = new RestaurantEntity();
+        restaurantRef.setId(product.getRestaurantId().getValue());
+        entity.setRestaurant(restaurantRef);
+
+        return entity;
+    }
+}
