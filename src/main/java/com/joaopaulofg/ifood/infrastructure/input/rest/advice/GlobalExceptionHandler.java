@@ -1,11 +1,9 @@
 package com.joaopaulofg.ifood.infrastructure.input.rest.advice;
 
-import com.joaopaulofg.ifood.domain.exception.InvalidProductException;
-import com.joaopaulofg.ifood.domain.exception.CategoryNotFoundException;
-import com.joaopaulofg.ifood.domain.exception.RestaurantNotFoundException;
-import com.joaopaulofg.ifood.infrastructure.input.rest.response.ErrorResponse;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.validation.ConstraintViolationException;
+import java.time.OffsetDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,48 +11,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.ServletWebRequest;
 
-import java.time.OffsetDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.joaopaulofg.ifood.infrastructure.input.rest.response.ErrorResponse;
+
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.ConstraintViolationException;
 
 @RestControllerAdvice(basePackages = "com.joaopaulofg.ifood.infrastructure.input.rest")
 public class GlobalExceptionHandler {
-
-    @ExceptionHandler(RestaurantNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleRestaurantNotFound(RestaurantNotFoundException ex, ServletWebRequest request) {
-        ErrorResponse body = ErrorResponse.builder()
-                .error("RestaurantNotFound")
-                .message(ex.getMessage())
-                .status(HttpStatus.NOT_FOUND.value())
-                .path(request.getRequest().getRequestURI())
-                .timestamp(OffsetDateTime.now())
-                .build();
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
-    }
-
-    @ExceptionHandler(CategoryNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleCategoryNotFound(CategoryNotFoundException ex, ServletWebRequest request) {
-        ErrorResponse body = ErrorResponse.builder()
-                .error("CategoryNotFound")
-                .message(ex.getMessage())
-                .status(HttpStatus.NOT_FOUND.value())
-                .path(request.getRequest().getRequestURI())
-                .timestamp(OffsetDateTime.now())
-                .build();
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
-    }
-
-    @ExceptionHandler(InvalidProductException.class)
-    public ResponseEntity<ErrorResponse> handleInvalidProduct(InvalidProductException ex, ServletWebRequest request) {
-        ErrorResponse body = ErrorResponse.builder()
-                .error("InvalidProduct")
-                .message(ex.getMessage())
-                .status(HttpStatus.BAD_REQUEST.value())
-                .path(request.getRequest().getRequestURI())
-                .timestamp(OffsetDateTime.now())
-                .build();
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
-    }
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleEntityNotFound(EntityNotFoundException ex, ServletWebRequest request) {

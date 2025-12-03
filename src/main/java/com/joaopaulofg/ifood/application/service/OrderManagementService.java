@@ -3,10 +3,8 @@ package com.joaopaulofg.ifood.application.service;
 import com.joaopaulofg.ifood.application.port.input.OrderManagementUseCase;
 import com.joaopaulofg.ifood.application.port.output.OrderItemRepository;
 import com.joaopaulofg.ifood.application.port.output.OrderRepository;
-import com.joaopaulofg.ifood.application.port.output.ProductRepository;
 import com.joaopaulofg.ifood.domain.model.Order;
 import com.joaopaulofg.ifood.domain.model.OrderItem;
-import com.joaopaulofg.ifood.domain.model.Product;
 import com.joaopaulofg.ifood.domain.vo.ClientId;
 import com.joaopaulofg.ifood.domain.vo.OrderId;
 import com.joaopaulofg.ifood.domain.vo.OrderItemId;
@@ -15,16 +13,18 @@ import com.joaopaulofg.ifood.domain.vo.ProductId;
 import com.joaopaulofg.ifood.domain.vo.RestaurantId;
 import com.joaopaulofg.ifood.infrastructure.input.rest.request.OrderItemSpec;
 import com.joaopaulofg.ifood.infrastructure.input.rest.response.OrderResponse;
+import com.joaopaulofg.ifood.infrastructure.output.client.CatalogClient;
+import com.joaopaulofg.ifood.infrastructure.output.client.dto.CatalogProductResponse;
+import com.joaopaulofg.ifood.infrastructure.output.client.dto.CatalogRestaurantResponse;
+import feign.FeignException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,7 +35,7 @@ public class OrderManagementService implements OrderManagementUseCase {
 
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
-    private final ProductRepository productRepository;
+    private final CatalogClient catalogClient;
     private final OrderMapper orderMapper;
 
     @Override
@@ -56,20 +56,22 @@ public class OrderManagementService implements OrderManagementUseCase {
         order.setTotalPrice(BigDecimal.ZERO);
 
         log.info("Order created, saving to repository...");
-        // Persist order first to ensure referential integrity
         Order savedOrder = orderRepository.save(order);
         log.info("Order saved with ID: {}", savedOrder.getId());
+
+        fetchRestaurant(restaurantId);
 
         BigDecimal total = BigDecimal.ZERO;
         for (OrderItemSpec spec : items) {
             ProductId productId = spec.getProductId();
             log.info("Processing item for product ID: {}", productId.getValue());
-            Product product = productRepository.findById(productId)
-                    .orElseThrow(() -> new IllegalArgumentException("Product not found: " + productId.getValue()));
+            CatalogProductResponse product = fetchProduct(productId);
 
-            log.info("Product: {}", product);
+            if (!restaurantId.getValue().equals(product.restaurantId())) {
+                throw new IllegalArgumentException("Product " + productId.getValue() + " does not belong to restaurant " + restaurantId.getValue());
+            }
 
-            BigDecimal unitPrice = product.getPrice();
+            BigDecimal unitPrice = product.price();
             BigDecimal lineTotal = unitPrice.multiply(BigDecimal.valueOf(spec.getQuantity()));
             total = total.add(lineTotal);
 
@@ -115,5 +117,25 @@ public class OrderManagementService implements OrderManagementUseCase {
     @Override
     public void deleteOrder(OrderId id) {
         orderRepository.deleteById(id);
+    }
+
+    private CatalogProductResponse fetchProduct(ProductId productId) {
+        try {
+            return catalogClient.getProduct(productId.getValue());
+        } catch (FeignException.NotFound ex) {
+            throw new IllegalArgumentException("Product not found: " + productId.getValue());
+        } catch (FeignException ex) {
+            throw new IllegalStateException("Failed to fetch product " + productId.getValue() + " from catalog service", ex);
+        }
+    }
+
+    private CatalogRestaurantResponse fetchRestaurant(RestaurantId restaurantId) {
+        try {
+            return catalogClient.getRestaurant(restaurantId.getValue());
+        } catch (FeignException.NotFound ex) {
+            throw new IllegalArgumentException("Restaurant not found: " + restaurantId.getValue());
+        } catch (FeignException ex) {
+            throw new IllegalStateException("Failed to fetch restaurant " + restaurantId.getValue() + " from catalog service", ex);
+        }
     }
 }

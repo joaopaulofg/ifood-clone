@@ -1,5 +1,19 @@
 package com.joaopaulofg.ifood.infrastructure.input.rest;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.joaopaulofg.ifood.application.port.input.OrderManagementUseCase;
 import com.joaopaulofg.ifood.domain.vo.ClientId;
 import com.joaopaulofg.ifood.domain.vo.OrderId;
@@ -9,13 +23,8 @@ import com.joaopaulofg.ifood.infrastructure.input.rest.request.CreateOrderReques
 import com.joaopaulofg.ifood.infrastructure.input.rest.request.OrderItemSpec;
 import com.joaopaulofg.ifood.infrastructure.input.rest.request.UpdateOrderStatusRequest;
 import com.joaopaulofg.ifood.infrastructure.input.rest.response.OrderResponse;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/orders")

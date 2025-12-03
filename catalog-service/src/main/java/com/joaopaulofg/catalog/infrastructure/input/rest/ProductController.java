@@ -2,6 +2,7 @@ package com.joaopaulofg.catalog.infrastructure.input.rest;
 
 import com.joaopaulofg.catalog.application.port.input.ProductManagementUseCase;
 import com.joaopaulofg.catalog.domain.vo.CategoryId;
+import com.joaopaulofg.catalog.domain.vo.ProductId;
 import com.joaopaulofg.catalog.domain.vo.RestaurantId;
 import com.joaopaulofg.catalog.infrastructure.input.rest.request.CreateProductRequest;
 import com.joaopaulofg.catalog.infrastructure.input.rest.response.ProductResponse;
@@ -35,5 +36,11 @@ public class ProductController {
     public ResponseEntity<List<ProductResponse>> getAllProducts(){
         List<ProductResponse> responses = productManagement.findAllProducts();
         return ResponseEntity.ok(responses);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductResponse> getProduct(@PathVariable String id){
+        ProductResponse response = productManagement.findProduct(ProductId.of(id));
+        return ResponseEntity.ok(response);
     }
 }

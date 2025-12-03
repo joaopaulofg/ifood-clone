@@ -6,7 +6,6 @@ import com.joaopaulofg.ifood.domain.vo.OrderId;
 import com.joaopaulofg.ifood.domain.vo.RestaurantId;
 import com.joaopaulofg.ifood.infrastructure.output.persistence.entity.ClientEntity;
 import com.joaopaulofg.ifood.infrastructure.output.persistence.entity.OrderEntity;
-import com.joaopaulofg.ifood.infrastructure.output.persistence.entity.RestaurantEntity;
 
 public class OrderEntityMapper {
 
@@ -14,7 +13,7 @@ public class OrderEntityMapper {
         Order order = new Order();
         order.setId(OrderId.of(entity.getId()));
         order.setClientId(ClientId.of(entity.getClient().getId()));
-        order.setRestaurantId(RestaurantId.of(entity.getRestaurant().getId()));
+        order.setRestaurantId(RestaurantId.of(entity.getRestaurantId()));
         order.setStatus(entity.getStatus());
         order.setCreationDate(entity.getCreationDate());
         order.setUpdateDate(entity.getUpdateDate());
@@ -30,9 +29,8 @@ public class OrderEntityMapper {
         client.setId(order.getClientId().getValue());
         entity.setClient(client);
 
-        RestaurantEntity restaurant = new RestaurantEntity();
-        restaurant.setId(order.getRestaurantId().getValue());
-        entity.setRestaurant(restaurant);
+
+        entity.setRestaurantId(order.getRestaurantId().getValue());
 
         entity.setStatus(order.getStatus());
         entity.setCreationDate(order.getCreationDate());

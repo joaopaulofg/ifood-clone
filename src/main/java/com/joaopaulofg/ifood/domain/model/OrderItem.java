@@ -1,13 +1,14 @@
 package com.joaopaulofg.ifood.domain.model;
 
-import com.joaopaulofg.ifood.domain.vo.OrderItemId;
+import java.math.BigDecimal;
+
 import com.joaopaulofg.ifood.domain.vo.OrderId;
+import com.joaopaulofg.ifood.domain.vo.OrderItemId;
 import com.joaopaulofg.ifood.domain.vo.ProductId;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.math.BigDecimal;
 
 @Getter
 @Setter

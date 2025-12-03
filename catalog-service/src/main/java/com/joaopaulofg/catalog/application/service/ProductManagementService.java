@@ -47,7 +47,7 @@ public class ProductManagementService implements ProductManagementUseCase {
 
     @Override
     public ProductResponse findProduct(ProductId id) {
-        return null;
+        return productRepository.findById(id).map(productMapper::toResponse).orElse(null);
     }
 
     @Override

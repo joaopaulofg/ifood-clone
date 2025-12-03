@@ -6,7 +6,6 @@ import com.joaopaulofg.ifood.domain.vo.OrderItemId;
 import com.joaopaulofg.ifood.domain.vo.ProductId;
 import com.joaopaulofg.ifood.infrastructure.output.persistence.entity.OrderEntity;
 import com.joaopaulofg.ifood.infrastructure.output.persistence.entity.OrderItemEntity;
-import com.joaopaulofg.ifood.infrastructure.output.persistence.entity.ProductEntity;
 
 public class OrderItemEntityMapper {
 
@@ -14,7 +13,7 @@ public class OrderItemEntityMapper {
         OrderItem item = new OrderItem();
         item.setId(OrderItemId.of(entity.getId()));
         item.setOrderId(OrderId.of(entity.getOrder().getId()));
-        item.setProductId(ProductId.of(entity.getProduct().getId()));
+        item.setProductId(ProductId.of(entity.getProductId()));
         item.setQuantity(entity.getQuantity());
         item.setUnitPrice(entity.getUnitPrice());
         return item;
@@ -28,9 +27,8 @@ public class OrderItemEntityMapper {
         order.setId(item.getOrderId().getValue());
         entity.setOrder(order);
 
-        ProductEntity product = new ProductEntity();
-        product.setId(item.getProductId().getValue());
-        entity.setProduct(product);
+
+        entity.setProductId(item.getProductId().getValue());
 
         entity.setQuantity(item.getQuantity());
         entity.setUnitPrice(item.getUnitPrice());
